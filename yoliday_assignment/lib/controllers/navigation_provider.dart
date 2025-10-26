@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NavigationProvider with ChangeNotifier {
-  int _currentIndex = 1; // Start on the Portfolio tab
+  int _currentIndex = 1;
 
   int get currentIndex => _currentIndex;
 

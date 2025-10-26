@@ -30,7 +30,7 @@ class MainApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               primarySwatch: Colors.orange,
-              scaffoldBackgroundColor: AppColors.scaffoldBackground,
+              
               fontFamily: 'Roboto', 
             ),
             home: child,

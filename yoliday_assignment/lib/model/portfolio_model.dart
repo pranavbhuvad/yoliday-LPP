@@ -1,5 +1,5 @@
 
-// Data model for a portfolio card
+
 class PortfolioItem {
   final String title;
   final String category;

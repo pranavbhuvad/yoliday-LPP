@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,32 +8,35 @@ class CustomBottomNavBar extends StatelessWidget {
   final Function(int) onTap;
 
   const CustomBottomNavBar({
-    super.key,
+    super.key, // Corrected super.key usage
     required this.currentIndex,
     required this.onTap,
   });
 
+  // Define the common duration for all transitions
+  static const Duration _animationDuration = Duration(milliseconds: 400);
+
   @override
   Widget build(BuildContext context) {
-    // Define the items for the bottom navigation bar
+    
     final List<_NavBarItem> items = [
       _NavBarItem(
-        iconPath: 'assets/icons/home.png', // Placeholder for Home Icon
+        iconPath: 'assets/Home svg.png',
         label: 'Home',
         index: 0,
       ),
       _NavBarItem(
-        iconPath: 'assets/icons/portfolio.png', // Placeholder for Portfolio Icon
+        iconPath: 'assets/Portfolia svg.png', 
         label: 'Portfolio',
         index: 1,
       ),
       _NavBarItem(
-        iconPath: 'assets/icons/input.png', // Placeholder for Input Icon
+        iconPath: 'assets/Input svg.png', 
         label: 'Input',
         index: 2,
       ),
       _NavBarItem(
-        iconPath: 'assets/icons/profile.png', // Placeholder for Profile Icon
+        iconPath: 'assets/Profile svg.png', 
         label: 'Profile',
         index: 3,
       ),
@@ -57,64 +59,85 @@ class CustomBottomNavBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: items.map((item) {
           final bool isSelected = item.index == currentIndex;
-          final Color color = isSelected ? AppColors.primaryOrange : AppColors.inactiveIcon;
+          // Define target and inactive colors, as used in the original logic
+          final Color targetColor = AppColors.primaryOrange;
+          final Color inactiveColor = AppColors.inactiveIcon;
 
-          return InkWell(
-            onTap: () => onTap(item.index),
-            child: SizedBox(
-              height: 70.h,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  // Indicator Container
-                  Container(
-                    height: 3.h,
-                    width: isSelected ? 30.w : 0,
-                    margin: EdgeInsets.only(bottom: 8.h),
-                    decoration: BoxDecoration(
-                      color: isSelected ? AppColors.primaryOrange : Colors.transparent,
-                      borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(5.r),
+          return Expanded(
+            child: InkWell(
+              onTap: () => onTap(item.index),
+              child: SizedBox(
+                height: 70.h,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // Indicator Container (Now Animated)
+                    AnimatedContainer(
+                      duration: _animationDuration,
+                      curve: Curves.easeOut,
+                      height: 3.h,
+                      // Animate width from 0 to 30.w
+                      width: isSelected ? 30.w : 0, 
+                      margin: EdgeInsets.only(bottom: 8.h),
+                      decoration: BoxDecoration(
+                        color: isSelected ? AppColors.primaryOrange : Colors.transparent,
+                        borderRadius: BorderRadius.vertical(
+                          bottom: Radius.circular(5.r),
+                        ),
                       ),
                     ),
-                  ),
-                  // Custom Image Icon (Tinted with ColorFiltered)
-                  ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                      color, // Applies the selected/inactive color
-                      BlendMode.srcIn, // Tints the asset image
-                    ),
-                    child: Image.asset(
-                      item.iconPath,
-                      width: 18.sp, // Responsive size for the image icon
-                      height: 20.sp, // Responsive size for the image icon
-                      errorBuilder: (context, error, stackTrace) {
-                        // IMPORTANT: Fallback to standard Flutter icons if asset is missing or fails to load
-                        IconData fallbackIcon = Icons.error;
-                        if (item.index == 0) fallbackIcon = Icons.home;
-                        if (item.index == 1) fallbackIcon = Icons.work;
-                        if (item.index == 2) fallbackIcon = Icons.add_box_outlined;
-                        if (item.index == 3) fallbackIcon = Icons.person;
+                    
+                    // Icon and Text Color (Now Animated)
+                    TweenAnimationBuilder<Color?>(
+                      // Tween between the inactive color and the selected color
+                      tween: ColorTween(begin: inactiveColor, end: isSelected ? targetColor : inactiveColor),
+                      duration: _animationDuration,
+                      builder: (context, color, child) {
+                        return Column(
+                          children: [
+                            // Custom Image Icon wrapped in ColorFiltered
+                            ColorFiltered(
+                              colorFilter: ColorFilter.mode(
+                                color!, // Use the animated color for the filter
+                                BlendMode.srcIn, 
+                              ),
+                              child: Image.asset(
+                                item.iconPath,
+                                width: 18.sp, 
+                                height: 20.sp, 
+                                errorBuilder: (context, error, stackTrace) {
+                                  // Fallback Icon logic remains the same
+                                  IconData fallbackIcon = Icons.error;
+                                  if (item.index == 0) fallbackIcon = Icons.home;
+                                  if (item.index == 1) fallbackIcon = Icons.work;
+                                  if (item.index == 2) fallbackIcon = Icons.add_box_outlined;
+                                  if (item.index == 3) fallbackIcon = Icons.person;
 
-                        return Icon(
-                          fallbackIcon,
-                          size: 20.sp,
-                          color: color, 
+                                  return Icon(
+                                    fallbackIcon,
+                                    size: 20.sp,
+                                    color: color, // Use the animated color for the fallback icon
+                                  );
+                                },
+                              ),
+                            ),
+                            SizedBox(height: 4.h),
+                            
+                            // Text
+                            Text(
+                              item.label,
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                color: color, // Use the animated color for the text
+                                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                              ),
+                            ),
+                          ],
                         );
                       },
                     ),
-                  ),
-                  SizedBox(height: 4.h),
-                  // Label
-                  Text(
-                    item.label,
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: color,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );
@@ -124,7 +147,7 @@ class CustomBottomNavBar extends StatelessWidget {
   }
 }
 class _NavBarItem {
-  // Changed from IconData icon to String iconPath
+  
   final String iconPath;
   final String label;
   final int index;

@@ -16,35 +16,35 @@ class PortfolioProvider with ChangeNotifier {
       category: "BAHASA SUNDA",
       author: "Oleh Al-Baiqi Samaan",
       grade: "A",
-      imageUrl: "assets/images/2.png", // Placeholder URL
+      imageUrl: "assets/images/2.png", 
     ),
     PortfolioItem(
       title: "Analisis Struktur Puisi",
       category: "BAHASA INGGRIS",
       author: "Oleh Budi Utomo",
       grade: "B",
-      imageUrl: "assets/images/3.png", // Placeholder URL
+      imageUrl: "assets/images/3.png", 
     ),
     PortfolioItem(
       title: "Proyek Pembuatan Website Portofolio",
       category: "TEKNOLOGI",
       author: "Oleh Candra Wijaya",
       grade: "A",
-      imageUrl: "assets/images/4.png", // Placeholder URL
+      imageUrl: "assets/images/4.png", 
     ),
     PortfolioItem(
       title: "Studi Kasus Perubahan Iklim Global",
       category: "GEOGRAFI",
       author: "Oleh Dewi Sartika",
       grade: "A",
-      imageUrl: "assets/images/1.png", // Placeholder URL
+      imageUrl: "assets/images/1.png", 
     ),
     PortfolioItem(
       title: "Perancangan Basis Data MySQL",
       category: "TEKNOLOGI",
       author: "Oleh Eka Putra",
       grade: "A",
-      imageUrl: "assets/images/2.png", // Placeholder URL
+      imageUrl: "assets/images/2.png", 
     ),
   ];
 

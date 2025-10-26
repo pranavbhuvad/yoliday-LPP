@@ -21,7 +21,7 @@ class PortfolioCard extends StatelessWidget {
           border: Border.all(color: AppColors.cardBorder, width: 1.0),
           boxShadow: [
             BoxShadow(
-              // Using a slightly more transparent black to approximate the shadow in the design
+              
               color: Colors.black.withOpacity(0.05),
               blurRadius: 8,
               offset: const Offset(0, 4),
@@ -30,7 +30,7 @@ class PortfolioCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Left: Image Placeholder
+            
             ClipRRect(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10.r),
@@ -39,7 +39,7 @@ class PortfolioCard extends StatelessWidget {
               child: Container(
                 width: 120.w,
                 height: 110.h,
-                color: Colors.grey[200], // Placeholder background
+                color: Colors.grey[200],
                 child: (item.imageUrl.isNotEmpty)
                     ? Image.asset(
                         item.imageUrl,
@@ -54,7 +54,7 @@ class PortfolioCard extends StatelessWidget {
               ),
             ),
             SizedBox(width: 12.w),
-            // Center: Text Content
+            
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 0),
@@ -93,7 +93,7 @@ class PortfolioCard extends StatelessWidget {
                 ),
               ),
             ),
-            // Right: Grade Badge
+            
             Align(
               alignment: Alignment.bottomRight,
               child: Padding(
@@ -103,7 +103,7 @@ class PortfolioCard extends StatelessWidget {
                   height: 26.w,
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(colors: [Color.fromRGBO(243, 149, 25, 1),Color.fromRGBO(255, 205, 103, 1)],),
-                    // color:Colors.transparent,
+                    
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Center(

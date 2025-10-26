@@ -21,7 +21,7 @@ class RootScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Watch the current index from the provider
+    
     final currentIndex = context.watch<NavigationProvider>().currentIndex;
 
     return Scaffold(
